@@ -1,0 +1,34 @@
+cmake_minimum_required(VERSION 3.20.1)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+project (soccer-main)
+
+set( NAME_SRC
+    src/main.cpp  
+    src/grid.cpp  
+    src/robot_img.cpp  
+    src/soccerPlayground_v2.cpp
+)
+
+set( NAME_HEADERS        
+    include/grid.hpp  
+    include/robot_img.hpp  
+    include/soccerPlayground_v2.hpp  
+    include/configs.hpp
+    include/a_star.cpp
+
+)
+
+find_package(OpenCV REQUIRED)
+
+include_directories(
+    ${OpenCV_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+
+add_executable(soccer-main ${NAME_SRC} ${NAME_HEADERS})
+
+target_link_libraries(soccer-main PRIVATE ${OpenCV_LIBS})
